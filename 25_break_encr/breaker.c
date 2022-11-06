@@ -48,7 +48,7 @@ int main(int argc, char ** argv) {
     }
     
     int res = (ch - 'e' + 26) % 26;
-    printf("%d", res);
+    printf("%d\n", res);
 
     return 0;
 }
