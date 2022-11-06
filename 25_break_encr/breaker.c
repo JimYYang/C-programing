@@ -34,7 +34,7 @@ int main(int argc, char ** argv) {
     int cnt[26] = {0};
     decrypt(f, &total, cnt);
     if (total == 0) {
-
+	return EXIT_FAILURE;
     }
     char ch = 'a';
     double per = 0;
