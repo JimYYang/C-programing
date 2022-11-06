@@ -34,16 +34,14 @@ int main(int argc, char ** argv) {
     int cnt[26] = {0};
     decrypt(f, &total, cnt);
     if (total == 0) {
-	return EXIT_FAILURE;
+        return EXIT_FAILURE;
     }
     char ch = 'a';
-    double per = 0;
+    int num = 0;
     for (size_t i = 0; i < 26; i ++ ) {
-        if (cnt[i]) {
-            per = (double)cnt[i] / total;
-            if (fabs(per - 0.13) < 1e-6){
-                ch = 'a' + i;
-            }
+        if (cnt[i] > num) {
+            num = cnt[i];
+            ch = 'a' + i;
         }
     }
     
