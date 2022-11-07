@@ -86,6 +86,19 @@ int main(int argc, char ** argv) {
         }
     }
 
+    /* char arr[10][10]; */
+    /* int c; */
+    /* for(int i = 0 ; i < 10; ++i) */
+    /* { */
+    /*     for(int j = 0; j < 10; ++j) */
+    /*     { */
+    /*         c = fgetc(f); */
+    /*         if(c == '\n') c = fgetc(f); */
+    /*         arr[i][j] = c; */
+    /*     } */
+    /*     c = fgetc(f); */
+    /* } */
+    
     rotate(m);
 
     for (int i = 0; i < 10; i ++) {
