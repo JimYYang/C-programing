@@ -5,12 +5,17 @@
 struct _kvpair_t { 
   //DEFINE ME!
 
+    char * key;
+    char * value;
+
 };
 typedef struct _kvpair_t kvpair_t;
 
 struct _kvarray_t { 
   //DEFINE ME!
 
+    kvpair_t ** kvpairs;
+    int numOfkvpairs;
 
 };
 typedef struct _kvarray_t kvarray_t;
@@ -25,3 +30,4 @@ void printKVs(kvarray_t * pairs);
 char * lookupValue(kvarray_t * pairs, const char * key);
 
 #endif
+
