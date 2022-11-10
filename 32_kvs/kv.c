@@ -25,7 +25,7 @@ kvarray_t * readKVs(const char * fname) {
     arr -> numOfkvpairs = 0;
     int cnt = 0;
 
-    char * line;
+    char * line = NULL;
     size_t sz = 0;
     kvpair_t ** pairs = NULL;
     while((getline(&line, &sz, f)) >= 0) {
