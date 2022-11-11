@@ -26,7 +26,9 @@ counts_t * countFile(const char * filename, kvarray_t * kvPairs) {
     *pos = '\0';
     char * val = lookupValue(kvPairs, line);
     addCount(c, val);
-    line = NULL;
+    /* line = NULL; */
+    // if we using the memory of line, we should let line = NULL
+    // if not, delete the clause
   }
   free(line);
   if (fclose(f) != 0) {
@@ -60,7 +62,7 @@ int main(int argc, char ** argv) {
 
  //free the memory for kv
 
-    if (argc <= 2) {
+    if (argc < 2) {
         fprintf(stderr, "few arguments\n");
         return EXIT_FAILURE;
     }
@@ -80,6 +82,7 @@ int main(int argc, char ** argv) {
             perror("Can not close file");
             return EXIT_FAILURE;
         }
+        free(out);
         freeCounts(c);
     }
     freeKVs(kvpair);
