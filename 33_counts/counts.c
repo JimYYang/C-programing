@@ -51,7 +51,7 @@ void printCounts(counts_t * c, FILE * outFile) {
     }
     
     if (c -> n_unknow)
-        printf("<unknown>: %d\n", c -> n_unknow);
+        fprintf(outFile, "<unknown> : %d\n", c -> n_unknow);
 }
 
 void freeCounts(counts_t * c) {
@@ -64,4 +64,5 @@ void freeCounts(counts_t * c) {
     free(c -> arr);
     free(c);
 }
+
 
