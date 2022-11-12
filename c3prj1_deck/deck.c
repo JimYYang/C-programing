@@ -84,7 +84,7 @@ deck_t * make_deck_exclude(deck_t * excluded_cards) {
     deck_t * d = malloc(sizeof (*d));
     d -> cards = NULL;
     d -> n_cards = 0;
-    d -> cards = malloc(excluded_cards -> n_cards * sizeof(card_t *));
+    //d -> cards = malloc(excluded_cards -> n_cards * sizeof(card_t *));
     for (unsigned i = 0; i < 52; i ++) {
         card_t c = card_from_num(i);
         if (!deck_contains(excluded_cards, c))
