@@ -1,0 +1,13 @@
+Grading at Sat 12 Nov 2022 02:54:54 AM UTC
+Compiling deck.c -> deck.o
+Compiling eval.c -> eval.o
+Compiling cards.c -> cards.o
+Linking eval.o, deck.o, cards.o, and our tester
+/usr/bin/ld: eval.o: in function `evaluate_hand':
+eval.c:(.text+0xcd4): undefined reference to `get_match_counts'
+/usr/bin/ld: tester.o: in function `check_get_match_count':
+c4p1-tester.c:(.text+0x1a54): undefined reference to `get_match_counts'
+collect2: error: ld returned 1 exit status
+Linking failed
+
+Overall Grade: F
