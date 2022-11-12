@@ -74,8 +74,8 @@ void add_card_to(deck_t * deck, card_t c) {
 
 card_t * add_empty_card(deck_t * deck) {
     card_t * card = malloc(sizeof(card_t));
-    card -> value = NOTHING;
-    card -> suit = NUM_SUITS;
+    card -> value = 0;
+    card -> suit = 0;
     add_card_to(deck, *card);
     return deck -> cards[deck -> n_cards - 1];
 }
