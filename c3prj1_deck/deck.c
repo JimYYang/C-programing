@@ -58,11 +58,16 @@ void assert_full_deck(deck_t * d) {
 
 
 void add_card_to(deck_t * deck, card_t c) {
+    // must allocate memory first
     card_t * t = malloc(sizeof(*t));
     t -> value = c.value;
     t -> suit = c.suit;
     deck -> cards = realloc(deck -> cards, ((deck -> n_cards) + 1) * sizeof(card_t *)); 
     deck -> cards[deck -> n_cards] = t;
+    // writing as following is not true
+    // because we only have memory for card_t *, but not card_t
+    /* deck -> cards[deck -> n_cards] -> value = c.value; */
+    /* deck -> cards[deck -> n_cards] -> suit = c.suit; */
     ++ deck -> n_cards;
 }
 
@@ -79,6 +84,7 @@ deck_t * make_deck_exclude(deck_t * excluded_cards) {
     deck_t * d = malloc(sizeof (*d));
     d -> cards = NULL;
     d -> n_cards = 0;
+    d -> cards = malloc(excluded_cards -> n_cards * sizeof(card_t *));
     for (unsigned i = 0; i < 52; i ++) {
         card_t c = card_from_num(i);
         if (!deck_contains(excluded_cards, c))
