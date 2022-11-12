@@ -1,4 +1,4 @@
-Grading at Sat 12 Nov 2022 03:38:43 AM UTC
+Grading at Sat 12 Nov 2022 03:42:23 AM UTC
 Compiling deck.c -> deck.o
 Compiling eval.c -> eval.o
 Compiling cards.c -> cards.o
@@ -8,57 +8,7 @@ Testing free_deck(deck_t *)
 Testing add_card_to(deck_t *, card_t)
 - Test passed
 Testing add_empty_card(deck_t *)
-Expected deck: Ad Ac 2s ?0
- 
-Your deck: Ad Ac 2s 8c 
-Expected deck: Ks Kh Kd Kc As Ah 2h 2d 2c 3s 3h 3d 3c 4s 4h 4d 4c 5s 5h 5d 5c 6s 6h 6d 6c 7s 7h 7d 7c 8s 8h 8d 8c 9s 9h 9d 9c 0s 0h 0d 0c Js Jh Jd Jc Qs Qh Qd Qc ?0
- 
-Your deck: Ks Kh Kd Kc As Ah 2h 2d 2c 3s 3h 3d 3c 4s 4h 4d 4c 5s 5h 5d 5c 6s 6h 6d 6c 7s 7h 7d 7c 8s 8h 8d 8c 9s 9h 9d 9c 0s 0h 0d 0c Js Jh Jd Jc Qs Qh Qd Qc 8c 
-Expected deck: 2s 2h 2d 2c ?0
- ?1
- 
-Your deck: 2s 2h 2d 2c 8c 8c 
-Expected deck: Ks Kh Kd Kc As Ah Ad Ac 3s 3h 3d 3c 4s 4h 4d 4c 5s 5h 5d 5c 6s 6h 6d 6c 7s 7h 7d 7c 8s 8h 8d 8c 9s 9h 9d 9c 0s 0h 0d 0c Js Jh Jd Jc Qs Qh Qd Qc ?0
- ?1
- 
-Your deck: Ks Kh Kd Kc As Ah Ad Ac 3s 3h 3d 3c 4s 4h 4d 4c 5s 5h 5d 5c 6s 6h 6d 6c 7s 7h 7d 7c 8s 8h 8d 8c 9s 9h 9d 9c 0s 0h 0d 0c Js Jh Jd Jc Qs Qh Qd Qc 8c 8c 
-Expected deck: 2d 2c 3s 3h 3d ?0
- ?1
- ?2
- 
-Your deck: 2d 2c 3s 3h 3d 8c 8c 8c 
-Expected deck: Ks Kh Kd Kc As Ah Ad Ac 2s 2h 3c 4s 4h 4d 4c 5s 5h 5d 5c 6s 6h 6d 6c 7s 7h 7d 7c 8s 8h 8d 8c 9s 9h 9d 9c 0s 0h 0d 0c Js Jh Jd Jc Qs Qh Qd Qc ?0
- ?1
- ?2
- 
-Your deck: Ks Kh Kd Kc As Ah Ad Ac 2s 2h 3c 4s 4h 4d 4c 5s 5h 5d 5c 6s 6h 6d 6c 7s 7h 7d 7c 8s 8h 8d 8c 9s 9h 9d 9c 0s 0h 0d 0c Js Jh Jd Jc Qs Qh Qd Qc 8c 8c 8c 
-Expected deck: 3s 3h 3d 3c 4s 4h ?0
- ?1
- ?2
- ?3
- 
-Your deck: 3s 3h 3d 3c 4s 4h 8c 8c 8c 8c 
-Expected deck: Ks Kh Kd Kc As Ah Ad Ac 2s 2h 2d 2c 4d 4c 5s 5h 5d 5c 6s 6h 6d 6c 7s 7h 7d 7c 8s 8h 8d 8c 9s 9h 9d 9c 0s 0h 0d 0c Js Jh Jd Jc Qs Qh Qd Qc ?0
- ?1
- ?2
- ?3
- 
-Your deck: Ks Kh Kd Kc As Ah Ad Ac 2s 2h 2d 2c 4d 4c 5s 5h 5d 5c 6s 6h 6d 6c 7s 7h 7d 7c 8s 8h 8d 8c 9s 9h 9d 9c 0s 0h 0d 0c Js Jh Jd Jc Qs Qh Qd Qc 8c 8c 8c 8c 
-Expected deck: 3d 3c 4s 4h 4d 4c 5s ?0
- ?1
- ?2
- ?3
- ?4
- 
-Your deck: 3d 3c 4s 4h 4d 4c 5s 8c 8c 8c 8c 8c 
-Expected deck: Ks Kh Kd Kc As Ah Ad Ac 2s 2h 2d 2c 3s 3h 5h 5d 5c 6s 6h 6d 6c 7s 7h 7d 7c 8s 8h 8d 8c 9s 9h 9d 9c 0s 0h 0d 0c Js Jh Jd Jc Qs Qh Qd Qc ?0
- ?1
- ?2
- ?3
- ?4
- 
-Your deck: Ks Kh Kd Kc As Ah Ad Ac 2s 2h 2d 2c 3s 3h 5h 5d 5c 6s 6h 6d 6c 7s 7h 7d 7c 8s 8h 8d 8c 9s 9h 9d 9c 0s 0h 0d 0c Js Jh Jd Jc Qs Qh Qd Qc 8c 8c 8c 8c 8c 
-- Test failed
+- Test passed
 Testing make_deck_exclude(deck_t *)
 - Test passed
 Testing build_remaining_deck(deck_t **, size_t)
@@ -72,4 +22,4 @@ Testing with 6 hands
 Testing get_match_count(deck_t *)
 - Test passed
 
-Overall Grade: B
+Overall Grade: A
