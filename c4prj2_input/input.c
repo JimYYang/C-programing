@@ -13,8 +13,8 @@ deck_t * hand_from_string(const char * str, future_cards_t * fc) {
             add_card_to(d, c);
         }
         else {
-            card_t *c = malloc(sizeof(*c));
-            c = add_empty_card(d);
+            //card_t *c = malloc(sizeof(*c));
+            card_t * c = add_empty_card(d);
             add_future_card(fc, str[i + 1] - '0', c);
         }
     }
