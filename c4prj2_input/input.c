@@ -1,49 +1,55 @@
-#include <stdlib.h>
+#include<string.h>
 #include <stdio.h>
-#include <string.h>
-#include "input.h"
-
-deck_t * hand_from_string(const char * str, future_cards_t * fc) {
-    deck_t * d = malloc(sizeof(*d));
-    d -> cards = NULL;
-    size_t len_str = strlen(str);
-    for (size_t i = 0; i + 1 < len_str; i += 3) {
-        if (str[i] != '?'){
-            card_t c = card_from_letters(str[i], str[i + 1]);
-            add_card_to(d, c);
-        }
-        else {
-            //card_t *c = malloc(sizeof(*c));
-            card_t * c = add_empty_card(d);
-            add_future_card(fc, str[i + 1] - '0', c);
-        }
+#include <stdlib.h>
+#include <assert.h>
+#include "deck.h"
+#include "cards.h"
+#include "future.h"
+deck_t * hand_from_string(const char * str, future_cards_t * fc)
+{
+  deck_t* deck = malloc(sizeof(*deck));
+  deck->cards = NULL;
+  deck->n_cards=0;
+  for(int i=0;i<strlen(str); ++i)
+  {
+    if((str[i] == '\n')||(str[i] == ' '))continue;
+    else{
+      if(str[i] == '?')
+      {
+        ++i;
+        char num[strlen(str)];
+        int n=0;
+        while(!((str[i] == '\n') || (str[i] == ' '))) {
+          num[n]=str[i];
+          i++;n++;}
+        num[n]='\0';
+        add_future_card(fc,atoi(num),add_empty_card(deck)) ;
+      }
+      else{
+        card_t x = card_from_letters(str[i],str[i+1]);
+        add_card_to(deck,x);
+        ++i;}
     }
-    return d;
+  }
+  if (deck->n_cards < 5 ){
+    return NULL;
+    fprintf(stderr,"asas");}
+  return deck;
 }
-
-deck_t ** read_input(FILE * f, size_t * n_hands, future_cards_t * fc) {
-    char * line = NULL;
-    size_t sz = 0;
-    size_t cnt = 0;
-    deck_t ** deck_ts = malloc(sizeof(deck_t *)); 
-    while ((getline(&line, &sz, f)) >= 0) {
-        char * pos1 = strchr(line, ';');
-        char * pos2 = strchr(line, '\n');
-        *pos1 = '\0';
-        *pos2 = '\0';
-        size_t len1 = strlen(line);
-        size_t len2 = strlen(pos1 + 2);
-        if (len1 < 14 || len2 < 14) {
-            fprintf(stderr, "Too few cards");
-            return NULL; 
-        }
-        deck_ts = realloc(deck_ts, (cnt + 2) * sizeof(deck_t *));
-        deck_ts[cnt] = hand_from_string(line, fc);
-        deck_ts[cnt + 1] = hand_from_string(pos1 + 2, fc);
-        cnt += 2;
-    }
-    free(line);
-    *n_hands += cnt;
-    return deck_ts;
+deck_t ** read_input(FILE * f, size_t * n_hands, future_cards_t * fc){
+  deck_t **arr=NULL;
+  size_t n_hand=0;
+  char *line=NULL;
+  size_t sz=0;
+  while(getline(&line,&sz,f)>=0)
+  {
+    arr=realloc(arr,(n_hand+1)*sizeof(*arr));
+    deck_t*deck=hand_from_string(line,fc);
+    if (deck == NULL)continue;
+    arr[n_hand]=deck;
+    ++n_hand;
+  }
+  free(line);
+  *n_hands=n_hand;
+  return arr;
 }
-
