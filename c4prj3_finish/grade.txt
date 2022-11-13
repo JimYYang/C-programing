@@ -1,4 +1,4 @@
-Grading at Sun 13 Nov 2022 03:30:04 AM UTC
+Grading at Sun 13 Nov 2022 03:38:05 AM UTC
 Running 'make clean' to do a clean build of your project
 rm -rf *.o poker *~
 Running 'make poker OTHERFLAGS=-O3' to build your project
@@ -30,43 +30,43 @@ Running a simulation with 25000 draws for 2 hands...
     Test case passed!    
 Running a simulation with 80000 draws for 4 hands...
 Valgrind reported errors:
-==1762== Memcheck, a memory error detector
-==1762== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==1762== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==1762== Command: ./poker inp3.txt 80000
-==1762== Parent PID: 1761
-==1762== 
-==1762== Invalid write of size 8
-==1762==    at 0x10B851: add_future_card (future.c:20)
-==1762==    by 0x10BA80: hand_from_string (input.c:22)
-==1762==    by 0x10BBB0: read_input (input.c:43)
-==1762==    by 0x1093C2: main (main.c:63)
-==1762==  Address 0x4a46e38 is 0 bytes after a block of size 24 alloc'd
-==1762==    at 0x483DFAF: realloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==1762==    by 0x10B841: add_future_card (future.c:19)
-==1762==    by 0x10BA80: hand_from_string (input.c:22)
-==1762==    by 0x10BBB0: read_input (input.c:43)
-==1762==    by 0x1093C2: main (main.c:63)
-==1762== 
-==1762== Invalid read of size 8
-==1762==    at 0x10B8C0: future_cards_from_deck (future.c:35)
-==1762==    by 0x10948E: main (main.c:69)
-==1762==  Address 0x4a46e38 is 0 bytes after a block of size 24 alloc'd
-==1762==    at 0x483DFAF: realloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==1762==    by 0x10B841: add_future_card (future.c:19)
-==1762==    by 0x10BA80: hand_from_string (input.c:22)
-==1762==    by 0x10BBB0: read_input (input.c:43)
-==1762==    by 0x1093C2: main (main.c:63)
-==1762== 
-==1762== 
-==1762== HEAP SUMMARY:
-==1762==     in use at exit: 0 bytes in 0 blocks
-==1762==   total heap usage: 960,187 allocs, 960,187 frees, 26,891,096 bytes allocated
-==1762== 
-==1762== All heap blocks were freed -- no leaks are possible
-==1762== 
-==1762== For lists of detected and suppressed errors, rerun with: -s
-==1762== ERROR SUMMARY: 160002 errors from 2 contexts (suppressed: 0 from 0)
+==2491== Memcheck, a memory error detector
+==2491== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2491== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==2491== Command: ./poker inp3.txt 80000
+==2491== Parent PID: 2490
+==2491== 
+==2491== Invalid write of size 8
+==2491==    at 0x10B855: add_future_card (future.c:20)
+==2491==    by 0x10BA80: hand_from_string (input.c:22)
+==2491==    by 0x10BBB0: read_input (input.c:43)
+==2491==    by 0x1093C2: main (main.c:63)
+==2491==  Address 0x4a46e28 is 0 bytes after a block of size 24 alloc'd
+==2491==    at 0x483DFAF: realloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2491==    by 0x10B845: add_future_card (future.c:19)
+==2491==    by 0x10BA80: hand_from_string (input.c:22)
+==2491==    by 0x10BBB0: read_input (input.c:43)
+==2491==    by 0x1093C2: main (main.c:63)
+==2491== 
+==2491== Invalid read of size 8
+==2491==    at 0x10B8C0: future_cards_from_deck (future.c:35)
+==2491==    by 0x10948E: main (main.c:69)
+==2491==  Address 0x4a46e28 is 0 bytes after a block of size 24 alloc'd
+==2491==    at 0x483DFAF: realloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2491==    by 0x10B845: add_future_card (future.c:19)
+==2491==    by 0x10BA80: hand_from_string (input.c:22)
+==2491==    by 0x10BBB0: read_input (input.c:43)
+==2491==    by 0x1093C2: main (main.c:63)
+==2491== 
+==2491== 
+==2491== HEAP SUMMARY:
+==2491==     in use at exit: 0 bytes in 0 blocks
+==2491==   total heap usage: 960,187 allocs, 960,187 frees, 26,891,072 bytes allocated
+==2491== 
+==2491== All heap blocks were freed -- no leaks are possible
+==2491== 
+==2491== For lists of detected and suppressed errors, rerun with: -s
+==2491== ERROR SUMMARY: 160002 errors from 2 contexts (suppressed: 0 from 0)
 Running a simulation with 30000 draws for 2 hands...
     Hand 0 was close enough to our answer
     Hand 1 was close enough to our answer
