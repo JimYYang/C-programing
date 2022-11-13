@@ -95,222 +95,110 @@ ssize_t  find_secondary_pair(deck_t * hand,
 }
 
 
-/* ssize_t get_index_5(deck_t * hand) { */
-/*     ssize_t res = -1; */
-/*     for (size_t i = 0; i < hand ->n_cards; i ++) { */
-/*         if (hand -> cards[i] -> value == 5){ */
-/*             res = i; */
-/*             break; */
-/*         } */
-/*     } */
-/*     return res; */
-/* } */
+int is_n_length_straight_at(deck_t * hand, size_t index, suit_t fs, int n) {
+  int count =1;
+  if (fs ==NUM_SUITS ){
+    for (size_t i=index ; i<hand ->n_cards-1; i++){
+      if ((*hand->cards[i]).value==(*hand->cards[i+1]).value) continue;
+      if ((*hand->cards[i]).value-1==(*hand->cards[i+1]).value){
+	count ++;
+	if (count == n) return 1;}
+      else return 0;
+    }}
+  else {
+    if((*hand->cards[index]).suit != fs ) return 0;
+    card_t* org=hand->cards[index];
+    for (size_t i=index+1 ; i<hand ->n_cards; i++){
+      if ((*hand->cards[i]).suit != fs) continue;
+      if (org->value-1==(*hand->cards[i]).value){
+	count ++;
+	if (count == n) return 1;
+	org=hand->cards[i]; }
+      else return 0;}}
 
-/* int get_straight_len(deck_t *hand, size_t index) { */
-/*     int cnt = 1; */
-/*     card_t ** card = hand -> cards; */
-/*     unsigned v = (*card[index]).value; */
-/*     unsigned next_v = v; */
-/*     size_t len = hand -> n_cards; */
-/*     for (size_t i = index; i < len; i ++) { */
-/*         size_t j = i + 1; */
-/*         while (j < len && card[j] -> value == v) j ++; */
-/*         if (j < len) */
-/*             next_v = card[j] -> value; */
-/*         if (next_v == v - 1) */
-/*             ++ cnt; */
-/*         else */
-/*             break; */
-/*         v = next_v; */
-/*         i = j - 1; */
-/*     } */
+  return 0;
+}
 
-/*     return cnt; */
-/* } */
-
-
-/* ssize_t get_index_5_suit(deck_t * hand, size_t index, suit_t fs) { */
-/*     card_t ** card = hand -> cards; */
-/*     unsigned v = card[index] -> value; */ 
-/*     size_t len = hand -> n_cards; */
-/*     ssize_t idx = -1; */
-
-/*     // first, find if there is a card, whose value = 5, suit = fs, if not return 0; */
-/*     // if has, this must be contained(if has multiple cards qualified, selecting the min-index is ok). */
-/*     for (size_t i = index; i < len; i ++) { */
-/*         size_t j = i + 1; */
-/*         while (j < len && card[j] -> value == v && card[j] -> suit != fs) j ++; */
-/*         if (j < len) { */
-/*             if (card[j] -> value == v && card[j] -> suit == fs){ */
-/*                 idx = j; */
-/*                 break; */
-/*             } */
-/*             else */
-/*                 return -1; */
-/*         } */
-/*     } */
-
-/*     return idx; */
-
-/* } */
-
-
-/* // this function don't need to contain the card in index!!! */
-/* int get_straight_flush_len(deck_t * hand, size_t index, suit_t fs) { */
-/*     int cnt = 1; */
-/*     card_t ** card = hand -> cards; */
-/*     unsigned v = (*card[index]).value; */
-/*     suit_t s = (*card[index]).suit; */
-/*     unsigned next_v = v; */
-/*     size_t len = hand -> n_cards; */
-
-/*     // first, find if there is a card, whose value = 5, suit = fs, if not return 0; */
-/*     // if has, this must be contained(if has multiple cards qualified, selecting the min-index is ok). */
-/*     // and if n == 5, the index will not changed. */
-/*     // because the value and the suit of the card in index both have been checked. */
-    
-/*     ssize_t idx = get_index_5_suit(hand, index, fs); */
-/*     if (idx == -1) */
-/*         return 0; */
-
-/*     for (size_t i = idx; i < len; i ++) { */
-/*         size_t j = i + 1; */
-/*         while (j < len && card[j] -> value == v) j ++; */
-/*         if (j < len) */ 
-/*             next_v = card[j] -> value; */
-        
-/*         while (j < len && card[j]->value == next_v && card[j] -> suit != fs) ++ j; */
-
-/*         if (j < len) { */
-/*             next_v = card[j] -> value; */
-/*             s = card[j] ->suit; */
-/*         } */
-/*         if (next_v == v - 1 && s == fs) */
-/*             ++ cnt; */
-/*         else */
-/*             break; */
-/*         v = next_v; */
-/*         i = j - 1; */
-/*     } */
-
-/*     return cnt; */
-/* } */
-
-/* int is_n_length_straight_at(deck_t * hand, size_t index, suit_t fs, int n) { */
-/*     // cnt1 is the length of straight */
-
-/*     int cnt1 = get_straight_len(hand, index); */
-
-/*     if (cnt1 == n) { */
-/*         if (fs == NUM_SUITS) */
-/*             return 1; */
-
-/*         suit_t type = flush_suit(hand); */
-/*         if (type == fs) { */
-/*             suit_t s = hand -> cards[index] -> suit; */
-/*             // nota that according to the principle of short circuit, n == 5 must precede b. */
-/*             if (n == 5 && s != fs) // when n = 5, the card in index is must be contained. */
-/*                 // while when n = 4, the first card 5 may be not contained. */
-/*                 return 0; // write like this(the line and the above) suppose that the straight flush contain the index!!! */
-
-/*             int cnt2 = get_straight_flush_len(hand, index, fs); */
-/*             if (cnt2 == n) */
-/*                 return 1; */
-/*             else */
-/*                 return 0; */
-/*         } */
-/*         else return 0; */
-/*     } */
-
-/*     return 0; */
-/* } */
-
-
-/* int is_ace_low_straight_at(deck_t * hand, size_t index, suit_t fs) { */
-/*     return is_n_length_straight_at(hand, index, fs, 4); */
-/* } */
-
-/* int is_straight_at(deck_t * hand, size_t index, suit_t fs) { */
-/*     card_t **card = hand -> cards; */
-/*     unsigned val = card[index] -> value; */
-/*     if (val != VALUE_ACE) */
-/*         return is_n_length_straight_at(hand, index, fs, 5); */
-    
-/*     int ace_high = is_n_length_straight_at(hand, index, fs, 5); */
-/*     if (ace_high) */
-/*         return ace_high; */    
-
-/*     ssize_t idx_5 = get_index_5(hand); */
-/*     suit_t s = card[index] -> suit; */
-/*     int ace_low = 0; */
-/*     if (idx_5 != -1 && s == fs) */
-/*         ace_low = is_n_length_straight_at(hand, idx_5, fs, 4); */
-
-/*     return ace_low; */
-/* } */
-
-
-int straight_helper(deck_t * hand, size_t index, suit_t fs, int suit, int count, size_t n)
-{
-  unsigned value = hand->cards[index]->value;
-  for(;index < n; ++index)
-    {
-      if(hand->cards[index]->suit == fs && (hand->cards[index]->value == value || hand->cards[index]->value == (value + 1)))
-	{
-	  ++suit;
-	}
-      if(hand->cards[index]->value == value)
-	{
-	  ++count;
-	  --value;
-	}
-      if(count == 5 && (fs == NUM_SUITS || suit == 5)) return 1;
-    }
+int is_ace_low_straight_at(deck_t * hand, size_t index, suit_t fs){
+  if((*hand->cards[index]).value == VALUE_ACE){
+    for (size_t i=index+1 ; i<hand ->n_cards-3; i++){
+      int t=is_n_length_straight_at( hand,i,fs, 4);
+      if (t ==1 && (*hand->cards[i]).value==5) {
+	if (fs == NUM_SUITS )  return 1;
+	else if ((*hand->cards[index]).suit == fs) return 1;
+	return 0;
+      }
+    }}
   return 0;
 }
 
 
-int is_straight_at(deck_t * hand, size_t index, suit_t fs)
-{
-  int count = 0;
-  int suit = 0;
-  size_t origIndex = index;
-  size_t n = hand->n_cards;
-  if(n-index < 5) return 0;
-
-  if(fs != NUM_SUITS && hand->cards[index]->suit != fs ) return 0;
-  if(hand->cards[index]->value == VALUE_ACE && hand->cards[n-1]->value == 2)
-    {
-      ++count;
-      for(int i = 0; i < 4; ++i)
-	{
-	  if(hand->cards[i]->value == VALUE_ACE && hand->cards[i]->suit == fs)
-	    {
-	      ++suit;
-	    }
-	}
-      while(index < hand->n_cards)
-	{
-	  if(hand->cards[index]->value == 5)
-	    {
-	      break;
-	    }
-	  ++index;
-	}
-      if(index != hand->n_cards)
-	{
-	  if(straight_helper(hand, index, fs, suit, count, n) == 1) return -1;
-	}
-    }
-  index = origIndex;
-  suit =0;
-  count = 0;
-  if(straight_helper(hand, index, fs, suit, count, n) == 1)
-    {
-      return 1;
-    }
-  return 0;
+int is_straight_at(deck_t * hand, size_t index, suit_t fs) {
+  if (is_ace_low_straight_at(hand, index,fs)) return -1;
+  return is_n_length_straight_at(hand, index, fs, 5);
 }
+
+/* int straight_helper(deck_t * hand, size_t index, suit_t fs, int suit, int count, size_t n) */
+/* { */
+/*   unsigned value = hand->cards[index]->value; */
+/*   for(;index < n; ++index) */
+/*     { */
+/*       if(hand->cards[index]->suit == fs && (hand->cards[index]->value == value || hand->cards[index]->value == (value + 1))) */
+/* 	{ */
+/* 	  ++suit; */
+/* 	} */
+/*       if(hand->cards[index]->value == value) */
+/* 	{ */
+/* 	  ++count; */
+/* 	  --value; */
+/* 	} */
+/*       if(count == 5 && (fs == NUM_SUITS || suit == 5)) return 1; */
+/*     } */
+/*   return 0; */
+/* } */
+
+
+/* int is_straight_at(deck_t * hand, size_t index, suit_t fs) */
+/* { */
+/*   int count = 0; */
+/*   int suit = 0; */
+/*   size_t origIndex = index; */
+/*   size_t n = hand->n_cards; */
+/*   if(n-index < 5) return 0; */
+
+/*   if(fs != NUM_SUITS && hand->cards[index]->suit != fs ) return 0; */
+/*   if(hand->cards[index]->value == VALUE_ACE && hand->cards[n-1]->value == 2) */
+/*     { */
+/*       ++count; */
+/*       for(int i = 0; i < 4; ++i) */
+/* 	{ */
+/* 	  if(hand->cards[i]->value == VALUE_ACE && hand->cards[i]->suit == fs) */
+/* 	    { */
+/* 	      ++suit; */
+/* 	    } */
+/* 	} */
+/*       while(index < hand->n_cards) */
+/* 	{ */
+/* 	  if(hand->cards[index]->value == 5) */
+/* 	    { */
+/* 	      break; */
+/* 	    } */
+/* 	  ++index; */
+/* 	} */
+/*       if(index != hand->n_cards) */
+/* 	{ */
+/* 	  if(straight_helper(hand, index, fs, suit, count, n) == 1) return -1; */
+/* 	} */
+/*     } */
+/*   index = origIndex; */
+/*   suit =0; */
+/*   count = 0; */
+/*   if(straight_helper(hand, index, fs, suit, count, n) == 1) */
+/*     { */
+/*       return 1; */
+/*     } */
+/*   return 0; */
+/* } */
 
 
 
@@ -525,5 +413,6 @@ hand_eval_t evaluate_hand(deck_t * hand) {
   }
   return build_hand_from_match(hand, 0, NOTHING, 0);
 }
+
 
 
