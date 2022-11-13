@@ -77,6 +77,7 @@ card_t * add_empty_card(deck_t * deck) {
     card -> value = 0;
     card -> suit = 0;
     add_card_to(deck, *card);
+    free(card);
     return deck -> cards[deck -> n_cards - 1];
 }
 
@@ -105,7 +106,15 @@ deck_t * build_remaining_deck(deck_t ** hands, size_t n_hands) {
                 add_card_to(excluded_cards, *(hands[i] -> cards[j]));
         }
     }
-    return make_deck_exclude(excluded_cards);
+    deck_t * d = make_deck_exclude(excluded_cards);
+
+    for(size_t i = 0; i < excluded_cards -> n_cards; i ++) {
+        free(excluded_cards -> cards[i]);
+    }
+    free(excluded_cards -> cards);
+    free(excluded_cards);
+    /* return make_deck_exclude(excluded_cards); */
+    return d;
 }
 
 void free_deck(deck_t * deck) {
@@ -115,5 +124,6 @@ void free_deck(deck_t * deck) {
     free(deck -> cards);
     free(deck);
 }
+
 
 
